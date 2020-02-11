@@ -39,7 +39,22 @@ site_veg <- read_csv('./raw_data/site_veg.csv') # vegetation quadrat data for Na
 
 ```
 
-### ANALYSES TO DO
+
+### Guiding Questions
+
+**1: Understanding variation in the invertebrate community on Naxos**
+
+- Is there variation in the invertebrate community across nine different sites on Naxos?
+- Is that variation related to vegetation characteristics? (% cover of different proportions of vegetation)
+- Is that variation related to human land-use metrics? (Presence/absence of goats or walls)
+
+**2: Understanding diet of *P. erhardii* on Naxos**
+
+- Is there variation in diet of the lizards across the nine sites?
+- Is any variation in diet related to the variation in insect availability? (Are the lizards generalists or specialists? Are they choosy? Are they eating just in proportion to what they're seeing?)
+
+
+### Analyses to do
 
 1. NMDS for prey communities
 2. NMDS for lizard diet
