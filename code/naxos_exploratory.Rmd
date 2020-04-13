@@ -1,0 +1,117 @@
+---
+title: "Naxos - Exploratory Analyses"
+author: "Kate Culhane"
+date: "2/10/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(root.dir = '..')
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.width=7, fig.height=5)
+```
+
+
+```{r include=FALSE}
+
+# Load necessary packages
+
+library(tidyverse)
+library(vegan)
+
+# Load necessary data
+
+diet <- read_csv('raw_data/diet_field.csv') %>% # diet data from field
+  filter(island == 'Naxos')
+
+inverts_meta <- read_csv('raw_data/inverts_meta.csv') %>% # metadata for invert community field collection
+  filter(island == 'Naxos')
+
+pitfall <- read_csv('raw_data/inverts_pitfall.csv') %>% # invert community data from pitfall traps
+  filter(island == 'Naxos')
+
+sticky <- read_csv('raw_data/inverts_sticky.csv') %>% # invert community data from sticky traps
+  filter(island == 'Naxos')
+
+site_meta <- read_csv('raw_data/site_meta.csv') # metadata for Naxos sites
+
+site_veg <- read_csv('raw_data/site_veg.csv') # vegetation quadrat data for Naxos sites
+
+```
+
+
+### Guiding Questions
+
+**1: Understanding variation in the invertebrate community on Naxos**
+
+- Is there variation in the invertebrate community across nine different sites on Naxos?
+- Is that variation related to vegetation characteristics? (% cover of different proportions of vegetation)
+- Is that variation related to human land-use metrics? (Presence/absence of goats or walls)
+
+**2: Understanding diet of *P. erhardii* on Naxos**
+
+- Is there variation in diet of the lizards across the nine sites?
+- Is any variation in diet related to the variation in insect availability? (Are the lizards generalists or specialists? Are they choosy? Are they eating just in proportion to what they're seeing?)
+
+
+### Analyses to do
+
+1. NMDS for prey communities
+2. NMDS for lizard diet
+3. Adonis between site types
+
+### Notes from Colin
+
+I looked at the repeated column (good catch). My guess is what happened was that every time we got a new taxa we'd add a new column and back-fill all of the previous samples with zeros. I suspect we filled that column in without noticing the other column. As near as I can tell one column has 18 individuals, the other has 1 and that single individual is a zero in the more populated column. What I would do then is sum the two columns and carry on our way.  
+
+A few stray thoughts: 
+It's cool that there was an individual that had 13 raphidiopterans in its gut (given how scarce they are throughout the dataset). I wonder if it would be interesting to flag some "odd balls" in the dataset where an individual gorged themselves on taxa that are fairly rare in the data as a whole. Maybe the lizard just came upon a nest or something? Maybe they just have a highly discerning palette. 
+
+It seems to me like a decision we're going to have to grapple with at some point down the line is what grain of detail we want to deal with in these data. You did a heroic job of identifying things so maybe for the sake of using the data to the best effect we should maintain that same level of detail. That said, merging groups into different categories may make some functional (?) or biological (?) sense? I'll keep thinking about it and would value your thoughts when we talk. One way we'd done this in the past was with the hard - medium - soft diet categories that then relate to bite force. 
+
+```{r, include=FALSE}
+
+# Update class of the data frame to "matrix"
+
+matrix <- as.matrix(diet[-c(1:4,44)]) # remove columns that aren't species
+rownames(matrix) <- diet$lizard_id # name the columns using site names
+
+# Choose a distance metric
+
+rankindex(diet$site,
+          wisconsin(matrix),
+          indicies = c('bray', 'euclidean', 'manhattan', 'horn'),
+          method = 'spearman')
+
+```
+
+```{r}
+
+# Ordination
+
+ord <- metaMDS(matrix, distance = 'bray', k = 2)
+ord$stress
+stressplot(ord)
+
+# Plot
+
+par(mar = c(4,4,1,1))
+
+plot(ord, display = 'sites', type = 'n')
+
+points(ord, display = 'sites')
+
+ordiellipse(ord, groups = diet$site)
+
+text(ord, display = 'species')
+
+```
+
+
+```{r eval=FALSE}
+
+rmarkdown::render('code/naxos_exploratory.Rmd', output_file = '../docs/naxos_exploratory.html')
+
+```
