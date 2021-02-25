@@ -1,0 +1,10 @@
+site,use,veg,coleoptera,diptera,hemiptera,hymenoptera,lepidoptera,orthoptera,collembola,embioptera,isoptera,neuroptera,psocoptera,thysanura,coleoptera_larvae,lepidoptera_larvae,acari,araneae,chilopoda,isopoda,opilliones,pseudoscorpiones,gastropoda,lizard,raphidioptera,homoptera
+DEMAR,high,high,23,164,26,77,0,0,4,0,0,0,0,0,0,0,11,9,0,1,0,1,0,0,0,1
+SAGRI,high,high,36,47,21,250,0,3,0,0,0,0,0,8,1,0,34,18,0,6,3,1,0,1,0,0
+EMONI,high,low,15,181,7,118,1,1,1,6,0,0,0,0,0,0,3,4,0,0,0,0,2,1,0,0
+SMONI,high,low,41,436,55,87,0,0,8,0,0,1,0,1,0,1,47,8,5,0,1,0,0,2,18,0
+WMONI,high,low,70,331,23,158,0,0,100,5,0,0,0,0,0,0,50,11,1,1,0,1,0,2,1,0
+RACHI,low,high,29,43,25,98,3,3,1,0,1,0,0,4,0,1,7,13,0,0,0,0,0,0,0,0
+VIGLA,low,high,45,171,44,355,0,2,0,51,0,0,0,0,8,1,5,8,0,1,0,3,0,1,0,0
+MALYKO,low,low,164,300,58,138,1,0,3,3,0,0,10,1,0,0,7,4,0,2,0,0,0,0,0,0
+NALYKO,low,low,75,237,10,111,0,0,0,0,0,0,0,2,1,0,3,2,1,0,0,0,0,0,0,0

@@ -1,0 +1,10 @@
+site,use,veg,blattodea,coleoptera,diptera,hemiptera,hymenoptera,lepidoptera,odonata,orthoptera,raphidioptera,thysanura,insect_egg,spider_egg,coleoptera_larvae,diptera_larvae,lepidoptera_larvae,neuroptera_larvae,acari,araneae,isopoda,pseudoscorpiones,gastropoda,berry,flower_parts,leaf,seed,seed_pod,stick,sand
+DEMAR,high,high,0,28,1,38,17,2,0,8,0,2,0,2,0,1,2,0,0,28,3,0,5,0,1,0,1,0,0,0
+SAGRI,high,high,0,2,0,3,1,0,0,5,0,0,7,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0
+EMONI,high,low,0,16,1,8,35,0,0,1,0,0,0,0,2,0,6,1,8,15,0,0,2,0,0,0,0,0,2,0
+SMONI,high,low,2,17,1,28,22,3,0,2,0,0,0,0,0,1,12,1,0,10,5,0,5,0,4,1,2,0,0,0
+WMONI,high,low,0,30,2,19,17,3,0,6,1,0,0,0,3,0,8,0,0,6,0,0,7,0,1,0,0,0,3,0
+RACHI,low,high,0,4,2,1,10,0,0,3,0,0,0,0,0,1,1,0,0,5,0,0,5,0,0,0,0,0,0,0
+VIGLA,low,high,0,10,1,111,16,2,0,1,0,0,1,0,6,0,3,0,2,5,0,0,7,0,1,0,0,0,1,0
+MALYKO,low,low,0,7,1,10,11,0,0,2,0,2,0,0,2,0,1,0,4,3,1,1,1,6,1,2,0,1,1,1
+NALYKO,low,low,3,5,0,0,0,0,1,0,0,0,0,0,1,0,2,0,0,3,0,1,0,0,0,1,0,0,0,3

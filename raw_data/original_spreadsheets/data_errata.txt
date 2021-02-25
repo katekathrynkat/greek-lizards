@@ -1,0 +1,25 @@
+DATA ERRATA
+
+- ALL: changed column names to snake case
+
+- ALL: combined Naxos and inter-island data of the same type
+
+- ALL: added "island" column so it's easy to filter for the Naxos data
+
+- STICKY: sticky trap spreadsheet had 2 "Raphidioptera" columns with different data --> summed columns together
+
+- STICKY & PITFALL: added "condition" column for sticky/pitfall traps based on comments
+
+- ALL: filled blanks with NA
+
+- DIET: 3 duplicate lizard IDs in diet data (ASPRO-524-9, EMONI-516-17, IRA-614-16) --> added "a" and "b" to IDs
+
+- NAXOS VEG & PREY META: split "other" into "dead", "moss", and "other" based on comments
+
+- NAXOS VEG: 3 cover values sum to <100 (EMONI 7, VIGLA 5, WMONI 6) --> found typos (WMONI 6) or added % to "other"
+
+- PREY META: 6 cover values sum to <100 (MANDO 2, GRAMVOUSSA 2 & 6, IRAKLIA 8, FIDOUSSA 9, SAGRI 12) --> added % to "other"
+
+- PREY META: 4 cover values sum to >100 (AMORGOS 9, DEMAR 5, SAGRI 6, WMONI 7) --> subtracted % from "open"
+
+- NAXOS META: added "use" and "veg" columns for land use (high/low) and vegetation cover (high/low)

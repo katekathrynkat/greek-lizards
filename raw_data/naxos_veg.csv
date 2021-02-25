@@ -1,0 +1,73 @@
+island,site,quadrat,grass,forbs,open,rock,shrub,dead,moss,other,dist_to_wall,avg_veg_height,comments
+Naxos,EMONI,1,5,10,30,0,40,15,0,0,0.5,0.5,Other is dead wood
+Naxos,EMONI,2,2,1,97,0,0,0,0,0,9,0.1,
+Naxos,EMONI,3,2,1,97,0,0,0,0,0,2.5,0.1,
+Naxos,EMONI,4,1,5,39,0,50,5,0,0,1,0.5,Other is dead wood
+Naxos,EMONI,5,3,0,97,0,0,0,0,0,1.5,0.05,
+Naxos,EMONI,6,3,3,94,0,0,0,0,0,3,0.1,
+Naxos,EMONI,7,0,80,10,0,0,0,0,10,0.1,0.6,
+Naxos,EMONI,8,7,15,68,10,0,0,0,0,0,0.15,
+Naxos,VIGLA,1,15,5,30,0,50,0,0,0,50,0.2,Center
+Naxos,VIGLA,2,10,60,20,10,0,0,0,0,45,0.2,Center
+Naxos,VIGLA,3,10,20,35,20,15,0,0,0,50,0.1,Center
+Naxos,VIGLA,4,25,10,35,0,30,0,0,0,60,0.2,Center
+Naxos,VIGLA,5,5,25,20,0,25,20,0,5,60,0.25,"Bottom Left Corner, Other is dead wood"
+Naxos,VIGLA,6,0,35,15,20,15,15,0,0,45,0.3,"Bottom Right Corner, Other is dead matter"
+Naxos,VIGLA,7,20,10,50,10,10,0,0,0,40,0.25,"Top Right Corner, Tall Grasses"
+Naxos,VIGLA,8,15,15,50,0,10,0,0,10,60,0.15,Top Left Corner
+Naxos,DEMAR,1,40,60,0,0,0,0,0,0,5,0.25,
+Naxos,DEMAR,2,60,35,5,0,0,0,0,0,20,0.15,
+Naxos,DEMAR,3,40,10,50,0,0,0,0,0,3,0.1,
+Naxos,DEMAR,4,25,75,0,0,0,0,0,0,10,0.3,
+Naxos,DEMAR,5,10,75,10,5,0,0,0,0,6,0.25,Center
+Naxos,DEMAR,6,20,60,20,0,0,0,0,0,5,0.2,Center
+Naxos,DEMAR,7,5,40,35,20,0,0,0,0,2,0.25,Center
+Naxos,DEMAR,8,25,30,40,0,0,5,0,0,3,0.1,"Center, Other is dead wood"
+Naxos,RACHI,1,5,5,5,0,85,0,0,0,20,0.3,Corner
+Naxos,RACHI,2,2,5,58,0,35,0,0,0,35,0.2,Corner
+Naxos,RACHI,3,0,5,5,0,90,0,0,0,60,0.25,Corner
+Naxos,RACHI,4,2,15,53,0,20,10,0,0,30,0.15,"Corner, other is dead"
+Naxos,RACHI,5,0,5,25,3,67,0,0,0,40,0.15,Center
+Naxos,RACHI,6,7,10,38,0,45,0,0,0,40,0.35,Center
+Naxos,RACHI,7,0,20,5,0,75,0,0,0,30,0.2,Center
+Naxos,RACHI,8,3,10,20,0,67,0,0,0,30,0.4,Center
+Naxos,SAGRI,1,72,10,15,0,3,0,0,0,5,0.2,
+Naxos,SAGRI,2,0,20,5,5,70,0,0,0,20,0.25,
+Naxos,SAGRI,3,2,5,2,5,50,0,36,0,4,0.3,Other = moss
+Naxos,SAGRI,4,20,20,0,0,40,5,15,0,4,0.5,Other = moss (15%) and dead (5%)
+Naxos,SAGRI,5,5,2,0,3,80,0,10,0,5,0.3,Other = moss
+Naxos,SAGRI,6,1,1,1,2,95,0,0,0,0,0.4,
+Naxos,SAGRI,7,10,10,0,40,40,0,0,0,0,0.35,
+Naxos,SAGRI,8,8,2,0,0,65,0,25,0,6,0.25,Other=moss
+Naxos,SMONI,1,3,2,95,0,0,0,0,0,1.5,0.05,
+Naxos,SMONI,2,5,5,90,0,0,0,0,0,1,0.1,
+Naxos,SMONI,3,10,15,65,10,0,0,0,0,0.5,0.25,
+Naxos,SMONI,4,10,20,70,0,0,0,0,0,1,0.25,
+Naxos,SMONI,5,3,10,87,0,0,0,0,0,2.5,0.15,
+Naxos,SMONI,6,2,2,96,0,0,0,0,0,1.5,0.05,
+Naxos,SMONI,7,5,10,85,0,0,0,0,0,2.5,0.1,
+Naxos,SMONI,8,10,25,15,50,0,0,0,0,0.1,0.6,
+Naxos,WMONI,1,35,45,3,0,2,0,15,0,3,0.05,Other=moss
+Naxos,WMONI,2,40,55,3,0,0,0,2,0,2,0.1,Other=moss
+Naxos,WMONI,3,40,45,10,0,0,5,0,0,2,0.3,Other=dead wood
+Naxos,WMONI,4,5,45,25,10,0,15,0,0,2,0.2,Other=dead wood
+Naxos,WMONI,5,5,15,65,5,0,0,10,0,3,0.05,Other=moss
+Naxos,WMONI,6,5,15,10,60,10,0,0,0,4,0.15,
+Naxos,WMONI,7,2,23,50,25,0,0,0,0,3,0.1,
+Naxos,WMONI,8,2,2,50,43,0,0,3,0,0,0.02,Other=moss
+Naxos,NALYKO,1,0,0,100,0,0,0,0,0,99999,0,
+Naxos,NALYKO,2,0,5,55,0,40,0,0,0,99999,0.15,
+Naxos,NALYKO,3,0,1,89,0,10,0,0,0,99999,0.05,
+Naxos,NALYKO,4,0,0,100,0,0,0,0,0,99999,0,under canopy
+Naxos,NALYKO,5,0,3,79,0,10,8,0,0,99999,0.1,Other=dead wood
+Naxos,NALYKO,6,0,2,98,0,0,0,0,0,99999,0.03,
+Naxos,NALYKO,7,0,15,65,0,20,0,0,0,99999,0.1,
+Naxos,NALYKO,8,0,15,60,0,25,0,0,0,99999,0.2,
+Naxos,MALYKO,1,0,15,85,0,0,0,0,0,99999,0.05,
+Naxos,MALYKO,2,0,2,73,0,25,0,0,0,99999,0.15,
+Naxos,MALYKO,3,0,0,75,0,25,0,0,0,99999,0.2,
+Naxos,MALYKO,4,0,0,10,0,90,0,0,0,99999,0.3,
+Naxos,MALYKO,5,0,0,100,0,0,0,0,0,99999,0,
+Naxos,MALYKO,6,0,0,97,0,3,0,0,0,99999,0.05,
+Naxos,MALYKO,7,0,0,0,0,90,0,0,10,99999,0.7,other=tree
+Naxos,MALYKO,8,0,0,0,0,100,0,0,0,99999,0.4,

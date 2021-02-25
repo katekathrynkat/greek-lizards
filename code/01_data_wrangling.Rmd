@@ -1,0 +1,181 @@
+---
+title: "Data Wrangling"
+author: "Kate Culhane"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(root.dir = '..')
+knitr::opts_chunk$set(include=FALSE)
+```
+
+<br>
+
+### Pre-analysis manipulation of datasets
+
+CSVs created for use in analyses, stored in "output_data".
+
+<br>
+
+**Prey data:**
+
+- *prey.csv*: prey data from both sticky and pitfall traps, one row per trap pair
+- *prey_effort.csv*: total trapping effort at each site for pitfall and sticky traps (max = 24 = 12 sticky + 12 pitfall), one row per site
+- *naxos_prey.csv*: prey data from both sticky and pitfall traps, for Naxos only, one row per trap pair
+
+<br>
+
+**Diet data:**
+
+- *diet.csv*: diet data from field samples, one row per lizard
+- *diet_effort.csv*: total number of lizards pumped at each site, one row per site
+- *naxos_diet.csv*: diet data from field samples, for Naxos only, one row per lizard
+
+<br>
+
+**Site by OTU matrices:**
+
+- *naxos_prey_matrix.csv*: Site by OTU matrix for prey data, for Naxos data only
+- *naxos_diet_matrix.csv*: Site by OTU matrix for diet data, for Naxos data only
+
+<br>
+
+```{r packages and data}
+
+# Load packages
+library(kableExtra)
+library(tidyverse)
+
+# Diet data
+field_diet <- read_csv('raw_data/diet_field.csv') # from field samples
+
+# Prey data
+pitfall <- read_csv('raw_data/prey_pitfall.csv') %>% # from pitfall traps
+  mutate(trap_id = paste0(site, '-', trap),
+         type = 'pitfall')
+sticky <- read_csv('raw_data/prey_sticky.csv') %>% # from sticky traps
+  mutate(trap_id = paste0(site, '-', trap),
+         type = 'sticky')
+prey_meta <- read_csv('raw_data/prey_meta.csv') # trap metadata
+
+# Naxos site data
+naxos_meta <- read_csv('raw_data/naxos_meta.csv') # metadata for Naxos sites
+naxos_veg <- read_csv('raw_data/naxos_veg.csv') # veg quadrat data for Naxos sites
+
+```
+
+```{r}
+
+# Prey data
+
+# Combine pitfall and sticky data by trap
+prey <- bind_rows(pitfall, sticky) %>% 
+  select(-c(date_analyzed, condition, comments, type)) %>% 
+  group_by(island, site, trap, trap_id) %>% 
+  summarize_all(sum, na.rm=TRUE) %>% 
+  ungroup()
+write_csv(prey, 'output_data/prey.csv', col_names=TRUE)
+
+# Trapping effort
+prey_effort <- bind_rows(pitfall, sticky) %>% 
+  select(island, site, trap, trap_id, type, condition) %>% 
+  mutate(
+    sticky_effort = case_when(
+      type=='sticky' & condition=='GOOD' ~ 1,
+      type=='sticky' & condition=='FLAW' ~ 0.5,
+      TRUE ~ 0
+    ),
+    pitfall_effort = case_when(
+      type=='pitfall' & condition=='GOOD' ~ 1,
+      type=='pitfall' & condition=='FLAW' ~ 0.5,
+      TRUE ~ 0
+    )
+  ) %>% 
+  group_by(island, site) %>% 
+  summarize_at(c('sticky_effort', 'pitfall_effort'), sum) %>% 
+  mutate(effort = (sticky_effort + pitfall_effort))
+write_csv(prey_effort, 'output_data/prey_effort.csv', col_names=TRUE)
+
+# Naxos data only
+naxos_prey <- prey %>% 
+  filter(island == 'Naxos') %>% 
+  full_join(naxos_meta[c(1:4)]) %>% 
+  select(site, use, veg, trap, trap_id, coleoptera:homoptera)
+write_csv(naxos_prey, 'output_data/naxos_prey.csv', col_names=TRUE)
+
+```
+
+```{r}
+
+# Diet data
+
+# All data
+diet <- field_diet %>% 
+  select(-date)
+write_csv(diet, 'output_data/diet.csv', col_names=TRUE)
+
+# Trapping effort (number of lizards pumped)
+diet_effort <- diet %>% 
+  group_by(island, site) %>% 
+  tally(name = 'n_lizards')
+write_csv(diet_effort, 'output_data/diet_effort.csv', col_names=TRUE)
+
+# Naxos data only
+naxos_diet <- diet %>% 
+  filter(island == 'Naxos') %>% 
+  full_join(naxos_meta[c(1:4)]) %>% 
+  select(site, use, veg, lizard_id, blattodea:salt, comments)
+write_csv(naxos_diet, 'output_data/naxos_diet.csv', col_names=TRUE)
+
+
+```
+
+```{r}
+
+# Site by OTU matrices
+
+# Prey
+naxos_prey_matrix <- naxos_prey %>%
+  select(-c(trap, trap_id)) %>% 
+  group_by(site, use, veg) %>% 
+  summarize_all(sum) %>% 
+  arrange(use, veg)
+naxos_prey_matrix <- naxos_prey_matrix[, colSums(naxos_prey_matrix != 0) > 0]
+write_csv(naxos_prey_matrix, 'output_data/naxos_prey_matrix.csv', col_names=TRUE)
+
+# Diet
+naxos_diet_matrix <- naxos_diet %>% 
+  select(-c(lizard_id, comments)) %>% 
+  group_by(site, use, veg) %>% 
+  summarize_all(sum) %>% 
+  arrange(use, veg)
+naxos_diet_matrix <- naxos_diet_matrix[, colSums(naxos_diet_matrix != 0) > 0]
+write_csv(naxos_diet_matrix, 'output_data/naxos_diet_matrix.csv', col_names=TRUE)
+
+```
+
+**Site by OTU matrix (Naxos): Prey**
+
+```{r, include=TRUE, echo=FALSE}
+
+kable(naxos_prey_matrix) %>% 
+  kable_styling(bootstrap_options = c('striped', 'condensed'),
+                full_width = FALSE,
+                position = 'left')
+
+```
+
+<br>
+
+**Site by OTU matrix (Naxos): Diet**
+
+```{r, include=TRUE, echo=FALSE}
+
+kable(naxos_diet_matrix) %>% 
+  kable_styling(bootstrap_options = c('striped', 'condensed'),
+                full_width = FALSE,
+                position = 'left')
+
+```
