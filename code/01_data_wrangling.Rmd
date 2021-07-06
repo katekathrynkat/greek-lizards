@@ -21,17 +21,15 @@ CSVs created for use in analyses, stored in "output_data".
 
 **Prey data:**
 
-- *prey.csv*: prey data from both sticky and pitfall traps, one row per trap pair
-- *prey_effort.csv*: total trapping effort at each site for pitfall and sticky traps (max = 24 = 12 sticky + 12 pitfall), one row per site
-- *naxos_prey.csv*: prey data from both sticky and pitfall traps, for Naxos only, one row per trap pair
+- *prey.csv*: prey data from both sticky and pitfall traps in long format (1 row per OTU per sticky/pitfall trap pair)
+- *naxos_prey.csv*: prey data from both sticky and pitfall traps, for Naxos only in long format (1 row per OTU per sticky/pitfall trap pair)
 
 <br>
 
 **Diet data:**
 
-- *diet.csv*: diet data from field samples, one row per lizard
-- *diet_effort.csv*: total number of lizards pumped at each site, one row per site
-- *naxos_diet.csv*: diet data from field samples, for Naxos only, one row per lizard
+- *diet.csv*: diet data from field samples in long format (1 row per OTU per lizard)
+- *naxos_diet.csv*: diet data from field samples, for Naxos onlyin long format (1 row per OTU per lizard)
 
 <br>
 
@@ -75,35 +73,19 @@ prey <- bind_rows(pitfall, sticky) %>%
   select(-c(date_analyzed, condition, comments, type)) %>% 
   group_by(island, site, trap, trap_id) %>% 
   summarize_all(sum, na.rm=TRUE) %>% 
-  ungroup()
+  ungroup() %>% 
+  pivot_longer(coleoptera:homoptera, names_to = 'otu', values_to = 'n') %>% 
+  filter(n != 0)
 write_csv(prey, 'output_data/prey.csv', col_names=TRUE)
-
-# Trapping effort
-prey_effort <- bind_rows(pitfall, sticky) %>% 
-  select(island, site, trap, trap_id, type, condition) %>% 
-  mutate(
-    sticky_effort = case_when(
-      type=='sticky' & condition=='GOOD' ~ 1,
-      type=='sticky' & condition=='FLAW' ~ 0.5,
-      TRUE ~ 0
-    ),
-    pitfall_effort = case_when(
-      type=='pitfall' & condition=='GOOD' ~ 1,
-      type=='pitfall' & condition=='FLAW' ~ 0.5,
-      TRUE ~ 0
-    )
-  ) %>% 
-  group_by(island, site) %>% 
-  summarize_at(c('sticky_effort', 'pitfall_effort'), sum) %>% 
-  mutate(effort = (sticky_effort + pitfall_effort))
-write_csv(prey_effort, 'output_data/prey_effort.csv', col_names=TRUE)
 
 # Naxos data only
 naxos_prey <- prey %>% 
   filter(island == 'Naxos') %>% 
   full_join(naxos_meta[c(1:4)]) %>% 
-  select(site, use, veg, trap, trap_id, coleoptera:homoptera)
+  select(site, use, veg, trap, trap_id, otu, n)
 write_csv(naxos_prey, 'output_data/naxos_prey.csv', col_names=TRUE)
+
+### JOIN prey AND naxos_prey WITH METADATA ABOUT BUGS (SIZE, HARDNESS, TAXON, TYPE, ETC.)
 
 ```
 
@@ -113,22 +95,17 @@ write_csv(naxos_prey, 'output_data/naxos_prey.csv', col_names=TRUE)
 
 # All data
 diet <- field_diet %>% 
-  select(-date)
+  select(-c(date, comments)) %>% 
+  pivot_longer(blattodea:salt, names_to = 'otu', values_to = 'n') %>% 
+  filter(n != 0)
 write_csv(diet, 'output_data/diet.csv', col_names=TRUE)
-
-# Trapping effort (number of lizards pumped)
-diet_effort <- diet %>% 
-  group_by(island, site) %>% 
-  tally(name = 'n_lizards')
-write_csv(diet_effort, 'output_data/diet_effort.csv', col_names=TRUE)
 
 # Naxos data only
 naxos_diet <- diet %>% 
   filter(island == 'Naxos') %>% 
   full_join(naxos_meta[c(1:4)]) %>% 
-  select(site, use, veg, lizard_id, blattodea:salt, comments)
+  select(site, use, veg, lizard_id, otu, n)
 write_csv(naxos_diet, 'output_data/naxos_diet.csv', col_names=TRUE)
-
 
 ```
 
